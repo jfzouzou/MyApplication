@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
  *
  */
 public class Event {   
-    //要执行方法的对象   
+    //要执行方法的对象
     private Object object;   
     //要执行的方法名称   
     private String methodName;   
