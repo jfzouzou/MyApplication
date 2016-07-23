@@ -34,7 +34,7 @@ public class Event {
             this.paramTypes[i]=params[i].getClass();   
         }   
     }   
-       
+
        
     public Object getObject() {
 		return object;
