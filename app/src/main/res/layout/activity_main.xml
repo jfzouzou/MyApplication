@@ -9,8 +9,23 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.use.myapplication.MainActivity">
 
-    <TextView
+    <Button
+        android:visibility="gone"
+        android:id="@+id/startService"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!" />
+
+    <Button
+        android:visibility="gone"
+        android:layout_below="@+id/startService"
+        android:id="@+id/stopService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!" />
+
+    <EditText
+        android:id="@+id/edt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </RelativeLayout>
