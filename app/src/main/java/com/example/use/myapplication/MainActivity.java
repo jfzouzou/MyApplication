@@ -2,18 +2,23 @@ package com.example.use.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.InputType;
-import android.text.TextWatcher;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.service.ServiceTest;
-import com.util.SDLogUtil;
-
-import java.text.NumberFormat;
+import com.util.guideview.Component;
+import com.util.guideview.Guide;
+import com.util.guideview.GuideBuilder;
+import com.util.guideview.cumponent.MutiComponent;
+import com.util.guideview.cumponent.SimpleComponent;
+import com.util.guideview1.GuideView1;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -28,7 +33,18 @@ public class MainActivity extends BaseActivity {
     Button stopService;
     @InjectView(R.id.edt)
     EditText edt;
+    @InjectView(R.id.guidetest)
+    EditText guidetest;
+    @InjectView(R.id.guideviewbutton1)
+    Button mGuideviewbutton1;
+    @InjectView(R.id.guideviewbutton2)
+    Button mGuideviewbutton2;
+    @InjectView(R.id.imageButton)
+    ImageButton mImageButton;
 
+    private GuideView1 mGuideView1;
+    private GuideView1 mGuideView13;
+    private GuideView1 mGuideView12;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,107 +53,72 @@ public class MainActivity extends BaseActivity {
         ButterKnife.inject(this);
         intentService = new Intent(MainActivity.this, ServiceTest.class);
 
-        String string = "111111111.11";
-        double adouble = Double.valueOf(string);
-        NumberFormat nf = NumberFormat.getInstance();
-        nf.setGroupingUsed(false);
-        SDLogUtil.debug("adouble;" + adouble + "doubleString" + String.valueOf(nf.format(adouble)));
-
-        int inputType = InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_CLASS_NUMBER;
-        edt.setInputType(inputType);
-        edt.addTextChangedListener(new TextWatcher() {
+        //第一种写法
+        edt.post(new Runnable() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-                String temp = s.toString();
-                int posDot = temp.indexOf(".");
-
-                //输入9位整数后只能输入.,否则删除第十位
-                if (temp.length() > 9) {
-                    if (posDot > 0){
-                        if (temp.length() - posDot - 1 > 2) {
-                            s.delete(posDot + 3, posDot + 4);
-                        }
-                    }
-                    if (posDot < 0) {
-                        s.delete(9, 10);
-                    }
-                }
-
-                //如果第一个数为0，第二个数只能为.,否则删除第二个数
-                int iszeo = temp.indexOf("0");
-                if (iszeo == 0 && temp.length() > 1) {
-                    if (posDot != 1) {
-                        s.delete(1, 2);
-                    }
-                }
-
-                //如果第一个数为.就删掉
-                if (posDot == 0) {
-                    s.delete(posDot, posDot + 1);
-                }
-
-                //小数点后保留两位
-                if (posDot <= 0) return;
-                if(temp.length() <= 9)
-                if (temp.length() - posDot - 1 > 2) {
-                    s.delete(posDot + 3, posDot + 4);
-                }
-
-
-//                String temp = s.toString();
-//                int posDot = temp.indexOf(".");
-
-//                //输入9位整数后只能输入.,否则删除第十位
-//                if (temp.length() > 9) {
-//                    if (posDot > 0) return;
-//                    if (posDot < 0) {
-//                        s.delete(temp.length()-8, temp.length());
-//                    }
-//                }
-//
-//                //判断如果小数位超过2就删掉2+
-//
-//                if (posDot < 0) return;
-//                if (posDot <= 0) {
-//                    s.delete(posDot + 3, posDot + 4);
-//                }
-//                if (temp.length() - posDot - 1 > 2) {
-//                    s.delete(posDot + 3, posDot + 4);
-//                }
-//
-//                //判断如果第一个数为.就删掉
-//                int Dot = temp.indexOf(".");
-//                if (Dot < 0) return;
-//                if (Dot == 0) {
-//                    s.delete(Dot, Dot + 1);
-//                }
-//
-//                //判断如果第一个数为0，第二个数只能为.,否则删除第二个数
-//                int iszeo = temp.indexOf("0");
-//              //  if (iszeo < 0) return;
-//                if (iszeo == 0 && temp.length() > 1) {
-//                    int iszeoposDot = temp.indexOf(".");
-//                    if (iszeoposDot != 1) {
-//                        s.delete(1, 2);
-//                    }
-//                }
+            public void run() {
+                showGuideView();
             }
         });
 
+
     }
 
-    @OnClick({R.id.startService, R.id.stopService})
+    public void showGuideView() {
+        GuideBuilder builder = new GuideBuilder();
+        builder.setTargetView(edt)
+                .setAlpha(150)
+                .setHighTargetCorner(20)
+                .setOverlayTarget(false)
+                .setOutsideTouchable(false);
+        builder.setOnVisibilityChangedListener(new GuideBuilder.OnVisibilityChangedListener() {
+            @Override
+            public void onShown() {
+                // Toast.makeText(SimpleGuideViewActivity.this, "show", Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onDismiss() {
+                // Toast.makeText(SimpleGuideViewActivity.this, "dismiss", Toast.LENGTH_SHORT)
+                // .show();
+                showGuideView2();
+            }
+        });
+        builder.addComponent(new SimpleComponent());
+        Guide guide = builder.createGuide();
+        guide.setShouldCheckLocInWindow(false);
+        guide.show(MainActivity.this);
+    }
+
+    public void showGuideView2() {
+        final GuideBuilder builder1 = new GuideBuilder();
+        builder1.setTargetView(guidetest)
+                .setAlpha(150)
+                .setHighTargetGraphStyle(Component.CIRCLE)
+                .setOverlayTarget(false)
+                .setExitAnimationId(android.R.anim.fade_out)
+                .setOutsideTouchable(false);
+        builder1.setOnVisibilityChangedListener(new GuideBuilder.OnVisibilityChangedListener() {
+            @Override
+            public void onShown() {
+                //  Toast.makeText(MutiGuideViewActivity.this, "show", Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onDismiss() {
+                //   Toast.makeText(MutiGuideViewActivity.this, "dismiss", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        builder1.addComponent(new MutiComponent());
+        Guide guide = builder1.createGuide();
+        guide.setShouldCheckLocInWindow(false);
+        guide.show(MainActivity.this);
+    }
+
+    @OnClick({R.id.startService, R.id.stopService, R.id.guideviewbutton1, R.id.guideviewbutton2, R.id.imagebutton})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.startService:
@@ -146,10 +127,94 @@ public class MainActivity extends BaseActivity {
             case R.id.stopService:
                 stopService(intentService);
                 break;
+            case R.id.guideviewbutton1:
+                break;
+            case R.id.guideviewbutton2:
+                break;
         }
     }
 
-    @OnClick(R.id.edt)
-    public void onClick() {
+    private void setGuideView() {
+
+        // 使用图片
+        final ImageView iv = new ImageView(this);
+        iv.setImageResource(R.drawable.notification_template_icon_bg);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        iv.setLayoutParams(params);
+
+        // 使用文字
+        TextView tv = new TextView(this);
+        tv.setText("欢迎使用");
+        tv.setTextColor(getResources().getColor(R.color.color_white));
+        tv.setTextSize(30);
+        tv.setGravity(Gravity.CENTER);
+
+        // 使用文字
+        final TextView tv2 = new TextView(this);
+        tv2.setText("欢迎使用2");
+        tv2.setTextColor(getResources().getColor(R.color.color_white));
+        tv2.setTextSize(30);
+        tv2.setGravity(Gravity.CENTER);
+
+
+        mGuideView1 = GuideView1.Builder
+                .newInstance(this)
+                .setTargetView(mImageButton)//设置目标
+                .setCustomGuideView(iv)
+                .setDirction(GuideView1.Direction.LEFT_BOTTOM)
+                .setShape(GuideView1.MyShape.CIRCULAR)   // 设置圆形显示区域，
+                .setBgColor(getResources().getColor(R.color.colorAccent))
+                .setOnclickListener(new GuideView1.OnClickCallback() {
+                    @Override
+                    public void onClickedGuideView() {
+                        mGuideView1.hide();
+                        mGuideView12.show();
+                    }
+                })
+                .build();
+
+
+        mGuideView12 = GuideView1.Builder
+                .newInstance(this)
+                .setTargetView(mGuideView12)
+                .setCustomGuideView(tv)
+                .setDirction(GuideView1.Direction.LEFT_BOTTOM)
+                .setShape(GuideView1.MyShape.ELLIPSE)   // 设置椭圆形显示区域，
+                .setBgColor(getResources().getColor(R.color.abc_input_method_navigation_guard))
+                .setOnclickListener(new GuideView1.OnClickCallback() {
+                    @Override
+                    public void onClickedGuideView() {
+                        mGuideView12.hide();
+                        mGuideView13.show();
+                    }
+                })
+                .build();
+
+
+        mGuideView13 = GuideView1.Builder
+                .newInstance(this)
+                .setTargetView(mGuideView13)
+                .setCustomGuideView(tv2)
+                .setDirction(GuideView1.Direction.LEFT_BOTTOM)
+                .setShape(GuideView1.MyShape.RECTANGULAR)   // 设置矩形显示区域，
+                .setRadius(80)          // 设置圆形或矩形透明区域半径，默认是targetView的显示矩形的半径，如果是矩形，这里是设置矩形圆角大小
+                .setBgColor(getResources().getColor(R.color.abc_input_method_navigation_guard))
+                .setOnclickListener(new GuideView1.OnClickCallback() {
+                    @Override
+                    public void onClickedGuideView() {
+                        mGuideView13.hide();
+                        mGuideView1.show();
+                    }
+                })
+                .build();
+
+        mGuideView1.show();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setGuideView();
+    }
+
 }

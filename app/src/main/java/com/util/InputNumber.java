@@ -1,5 +1,10 @@
 package com.util;
 
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
+import android.widget.EditText;
+
 import java.util.regex.Matcher;
 
 /**
@@ -8,29 +13,84 @@ import java.util.regex.Matcher;
 
 public class InputNumber{
 
+    EditText edt ;
+    public void edit(){
+        int inputType = InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_CLASS_NUMBER;
+        edt.setInputType(inputType);
 
-    //输入的最大金额
-    private static final int MAX_VALUE = Integer.MAX_VALUE;
-    //小数点后的位数
-    private static final int POINTER_LENGTH = 2;
+//        edt.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//        String temp = s.toString();
+//        int posDot = temp.indexOf(".");
+//
+//        //输入9位整数后只能输入.,否则删除第十位
+//        if (temp.length() > 9) {
+//            if (posDot > 0) {
+//                if (temp.length() - posDot - 1 > 2) {
+//                    s.delete(posDot + 3, posDot + 4);
+//                }
+//            }
+//            if (posDot < 0) {
+//                s.delete(9, 10);
+//            }
+//        }
+//
+//        //如果第一个数为0，第二个数只能为.,否则删除第二个数
+//        int iszeo = temp.indexOf("0");
+//        if (iszeo == 0 && temp.length() > 1) {
+//            if (posDot != 1) {
+//                s.delete(1, 2);
+//            }
+//        }
+//
+//        //如果第一个数为.就删掉
+//        if (posDot == 0) {
+//            s.delete(posDot, posDot + 1);
+//        }
+//
+//        //小数点后保留两位
+//        if (posDot <= 0) return;
+//        if (temp.length() <= 9)
+//            if (temp.length() - posDot - 1 > 2) {
+//                s.delete(posDot + 3, posDot + 4);
+//            }
 
-    private static final String POINTER = ".";
+    }
 
-    private static final String ZERO = "0";
+            //输入的最大金额
+            private static final int MAX_VALUE = Integer.MAX_VALUE;
+            //小数点后的位数
+            private static final int POINTER_LENGTH = 2;
+
+            private static final String POINTER = ".";
+
+            private static final String ZERO = "0";
 
 //    public CashierInputFilter() {
 //        mPattern = Pattern.compile("([0-9]|\\.)*");
 //    }
 
-    /**
-     * @param source    新输入的字符串
-     * @param start     新输入的字符串起始下标，一般为0
-     * @param end       新输入的字符串终点下标，一般为source长度-1
-     * @param dest      输入之前文本框内容
-     * @param dstart    原内容起始坐标，一般为0
-     * @param dend      原内容终点坐标，一般为dest长度-1
-     * @return          输入内容
-     */
+            /**
+             * @param source    新输入的字符串
+             * @param start     新输入的字符串起始下标，一般为0
+             * @param end       新输入的字符串终点下标，一般为source长度-1
+             * @param dest      输入之前文本框内容
+             * @param dstart    原内容起始坐标，一般为0
+             * @param dend      原内容终点坐标，一般为dest长度-1
+             * @return 输入内容
+             */
 //    @Override
 //    public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
 //        String sourceText = source.toString();
@@ -77,4 +137,5 @@ public class InputNumber{
 //        }
 //
 //        return dest.subSequence(dstart, dend) + sourceText;
-    }
+
+        }
