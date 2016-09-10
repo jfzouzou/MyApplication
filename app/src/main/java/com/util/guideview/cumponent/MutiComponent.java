@@ -8,7 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.util.guideview.Component;
-import com.example.use.myapplication.R;
+import com.example.use.ui.R;
 
 
 /**
