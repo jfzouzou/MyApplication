@@ -28,7 +28,7 @@ public class MainActivity extends BaseActivity {
               new Handler().postDelayed(new Runnable() {
                   @Override
                   public void run() {
-                      openActivity(GuideViewActivity.class);
+                    //  openActivity(GuideViewActivity.class);
                   }
               },2000);
 
