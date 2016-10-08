@@ -2,16 +2,57 @@ package com.util;
 
 import android.text.Editable;
 import android.text.InputType;
-import android.text.TextWatcher;
 import android.widget.EditText;
-
-import java.util.regex.Matcher;
 
 /**
  * Created by zy on 2016/7/21.
  */
 
 public class InputNumber{
+
+    public void afterTextChanged(Editable s) {
+
+        try {
+            String temp = s.toString();
+            int posDot = temp.indexOf(".");
+
+            //输入9位整数后只能输入.,否则删除第9位
+            if (temp.length() > 9) {
+                if (posDot > 0) {
+                    if (temp.length() - posDot - 1 > 2) {
+                        s.delete(posDot + 3, posDot + 4);
+                    }
+                }
+                if (posDot < 0) {
+                    s.delete(9 , 10 );
+                }
+            }
+
+            //如果第一个数为0，第二个数只能为.,否则删除第二个数
+            int iszeo = temp.indexOf("0");
+            if (iszeo == 0 && temp.length() > 1) {
+                if (posDot != 1) {
+                    s.delete(1, 2);
+                }
+            }
+
+            //如果第一个数为.就删掉
+            if (posDot == 0) {
+                s.delete(posDot, posDot + 1);
+            }
+
+            //小数点后保留两位
+            if (posDot <= 0) return;
+            if (temp.length() <= 9)
+                if (temp.length() - posDot - 1 > 2) {
+                    s.delete(posDot + 3, posDot + 4);
+                }
+
+        } catch (Exception e) {
+
+        }
+
+    }
 
     EditText edt ;
     public void edit(){

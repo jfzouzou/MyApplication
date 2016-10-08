@@ -3,7 +3,7 @@ textview \ textview  微软雅黑字体，自定义TextView editview
 
 AppUtils 获取版本code、获取版本name
 
-InputNumber 输入金额限制
+InputNumber  .afterTextChanged输入金额限制
 
 MyToast 吐司提示
 
