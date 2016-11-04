@@ -48,5 +48,11 @@ com.service 服务
 /***********************
 com.com.use.zy.entrust 事件分发
 
+/***********************
+com.com.use.zy.entrust QQListView  仿qq左滑删除
+
+/***********************
+com.util.RecyclerViewIndexBar  RecyclerViewIndexBar头部固定
+
 
 

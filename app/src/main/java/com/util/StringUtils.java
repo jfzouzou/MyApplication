@@ -684,4 +684,24 @@ public class StringUtils {
 
     }
 
+    /**
+     * 在指定字符串的最后位置插入字符串
+     * @param url
+     * @param date
+     * @return
+     * 栗子：  String rul = insetString("", "2016-09");
+    Log.i("zy", rul);
+     */
+    public static String insetString(String url, String date) {
+        StringBuilder sb = new StringBuilder();
+        try {
+            sb.append(url);
+            int i = url.lastIndexOf("/");
+            sb.insert(i + 1, date);//+1是在string后插入
+        } catch (Exception e) {
+            Log.i("zy", e.toString());
+        }
+        return sb.toString();
+    }
+
 }

@@ -1,67 +1,67 @@
 package com.example.use.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.base.BaseActivity;
+import com.util.HlistView.MainActivityHListView;
 
 public class MainActivity extends BaseActivity {
 
-    private int flagStr = 0;
+    private TextView thread_tv,qqlist,recyclerviewindexBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String rul = insetString("","2016-09");
-        Log.i("zy",rul);
-        init();
+
+
+        thread_tv = (TextView) findViewById(R.id.thred_tv);
+        qqlist = (TextView) findViewById(R.id.qqlist);
+        recyclerviewindexBar = (TextView) findViewById(R.id.recyclerviewindexBar);
+        thread_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, MainActivityHListView.class));
+            }
+        });
+
+        qqlist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, QQListActivity.class));
+            }
+        });
+
+        recyclerviewindexBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, RecyclerViewIndexBarActivity.class));
+            }
+        });
+
+
     }
-
-  private void init(){
-
-      switch (flagStr){
-          case 0:
-              new Handler().postDelayed(new Runnable() {
-                  @Override
-                  public void run() {
-                    //  openActivity(GuideViewActivity.class);
-                  }
-              },2000);
-
-              break;
-      }
-
-
-  }
 
     private long mPressedTime = 0;
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         long time = System.currentTimeMillis();
-        if((time - mPressedTime) >2000) {
-            Toast.makeText(this,"再按一次退出程序",Toast.LENGTH_SHORT).show();
+        if ((time - mPressedTime) > 2000) {
+            Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
             mPressedTime = time;
-        }else{
+        } else {
             finish();
         }
     }
 
-    public static String insetString(String url, String date) {
-        StringBuilder sb = new StringBuilder();
-        try{
-            sb.append(url);
-            int i = url.lastIndexOf("/");
-            sb.insert(i+1, date);//+1是在string后插入
-        }catch (Exception e){
-            Log.i("zy",e.toString());
-        }
-        return sb.toString();
-    }
+
 }
 
 

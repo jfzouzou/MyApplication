@@ -10,4 +10,19 @@
     <color name="std_login_button_bg">#007040</color>
 
     <color name="white">#ffffff</color>
+
+
+
+    <color name="darkgreen">#008F7D</color>
+    <color name="blue">#18b4ed</color><!-- 蓝色 -->
+    <color name="common_color_2">#555555</color>
+
+<!--indexBar
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+ -->
+
+
+    <color name="partTranslucent">#39000000</color>
 </resources>

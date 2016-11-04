@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <tablayout.view.textview.FontTextView
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:background="#fefefe"
+        android:id="@+id/process"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="销售进程" />
+
+    <LinearLayout
+        android:layout_marginLeft="6px"
+        android:id="@+id/flows_group"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:orientation="horizontal">
+
+    </LinearLayout>
+</LinearLayout>
