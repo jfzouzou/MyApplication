@@ -11,14 +11,13 @@ import com.util.HlistView.MainActivityHListView;
 
 public class MainActivity extends BaseActivity {
 
-    private TextView thread_tv,qqlist,recyclerviewindexBar;
+    private TextView thread_tv, qqlist, recyclerviewindexBar;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
 
         thread_tv = (TextView) findViewById(R.id.thred_tv);
@@ -48,7 +47,18 @@ public class MainActivity extends BaseActivity {
 
     }
 
+    private void String() {
+        //如何实现“ I am Student”转为“Student am I”？
+        String string = " I am Student";
+        String str = "";
+        for (int i = string.length() - 1; i > -1; i--) {
+            str += String.valueOf(str.charAt(i));
+        }
+
+    }
+
     private long mPressedTime = 0;
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();

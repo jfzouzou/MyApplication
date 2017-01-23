@@ -19,17 +19,18 @@
         android:textSize="15sp"/>
 
     <TextView
+
         android:id="@+id/qqlist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1111111111111"
+        android:text="qqlist"
         android:textSize="15sp"/>
 
     <TextView
         android:id="@+id/recyclerviewindexBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
+        android:text="recyclerviewindexBar"
         android:textSize="15sp"/>
 
     <TextView
