@@ -1,17 +1,36 @@
 package com.example.use.ui;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.base.BaseActivity;
 import com.util.HlistView.MainActivityHListView;
+import com.util.MyToast;
+
 
 public class MainActivity extends BaseActivity {
 
-    private TextView thread_tv, qqlist, recyclerviewindexBar;
+    private TextView thread_tv, qqlist, recyclerviewindexBar, thred_tv3, thred_tv4;
+
+    /**
+     * BroadcaseReceiver
+     */
+    private IntentFilter intentFilter;
+    private NetworkChangeReceiver networkChangeReceiver;
+
+    //本地广播
+    private LocalBroadcastManager localBroadcastManager;
+    private LocalReceiver localReceiver;
 
 
     @Override
@@ -19,10 +38,17 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        /**
+         * 本地广播
+         */
+        localBroadcastManager = LocalBroadcastManager.getInstance(this);
 
         thread_tv = (TextView) findViewById(R.id.thred_tv);
         qqlist = (TextView) findViewById(R.id.qqlist);
         recyclerviewindexBar = (TextView) findViewById(R.id.recyclerviewindexBar);
+        thred_tv3 = (TextView) findViewById(R.id.thred_tv3);
+        thred_tv4 = (TextView) findViewById(R.id.thred_tv4);
+
         thread_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,6 +70,85 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+        /**
+         * 发送广播
+         */
+        thred_tv3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intet = new Intent("post broadcastRecivier");
+                sendBroadcast(intet);
+//                sendOrderedBroadcast(intet, null);
+            }
+        });
+
+
+        /**
+         * 发送本地广播
+         */
+        thred_tv4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intet = new Intent("com.example.use.ui.MYBROADCASTRECEIVER");
+                //sendBroadcast(intet);
+               // sendOrderedBroadcast(intet, null);
+                localBroadcastManager.sendBroadcast(intet);
+            }
+        });
+
+        /**
+         * BroadcaseReceiver
+         */
+        intentFilter = new IntentFilter();
+        intentFilter.addAction("com.example.use.ui.MYBROADCASTRECEIVER");
+        localReceiver = new LocalReceiver();
+        localBroadcastManager.registerReceiver(localReceiver,intentFilter);
+
+//        networkChangeReceiver = new NetworkChangeReceiver();
+//        registerReceiver(networkChangeReceiver, intentFilter);
+
+
+
+    }
+
+
+    /**
+     * BroadcaseReceiver
+     */
+
+    class NetworkChangeReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            if (networkInfo != null && networkInfo.isAvailable()) {
+                Log.i("zy", "网络链接");
+            } else {
+                Log.i("zy", "网络断开");
+            }
+
+        }
+    }
+
+    class LocalReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            MyToast.showToast(MainActivity.this, "本地广播");
+        }
+    }
+
+
+    /**
+     * 移除BroadcaseReceiver注册
+     */
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+      //  unregisterReceiver(networkChangeReceiver);
+        localBroadcastManager.unregisterReceiver(localReceiver);
+        Toast.makeText(MainActivity.this, "unregisterReceiver change", Toast.LENGTH_SHORT).show();
 
     }
 

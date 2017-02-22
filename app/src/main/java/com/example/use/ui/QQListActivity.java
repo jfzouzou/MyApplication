@@ -1,12 +1,12 @@
 package com.example.use.ui;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.base.BaseActivity;
 import com.util.QQListView;
 
 import java.util.ArrayList;
@@ -17,14 +17,13 @@ import java.util.List;
  * Created by zy on 2016/11/1.
  */
 
-public class QQListActivity extends Activity {
+public class QQListActivity extends BaseActivity {
 
     private QQListView mListView;
     private List<String> mDatas;
     private ArrayAdapter<String> mAdapter;
 
 
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qqlist);

@@ -12,10 +12,11 @@
                 tools:context="com.example.use.ui.MainActivity">
 
     <TextView
+
         android:id="@+id/thred_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="1"
+        android:text="横纵双向滑动list"
         android:textSize="15sp"/>
 
     <TextView
@@ -23,7 +24,7 @@
         android:id="@+id/qqlist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="qqlist"
+        android:text="qqlistitem向左滑动删除效果"
         android:textSize="15sp"/>
 
     <TextView
@@ -37,14 +38,14 @@
         android:id="@+id/thred_tv3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1"
+        android:text="myBoradCastReicvier"
         android:textSize="15sp"/>
 
     <TextView
         android:id="@+id/thred_tv4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1"
+        android:text="本地广播"
         android:textSize="15sp"/>
 
 

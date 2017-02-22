@@ -1,11 +1,11 @@
 package com.example.use.ui;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
+import com.base.BaseActivity;
 import com.util.RecyclerViewIndexBar.CityAdapter;
 import com.util.RecyclerViewIndexBar.CityBean;
 import com.util.RecyclerViewIndexBar.IndexBar;
@@ -19,7 +19,7 @@ import java.util.List;
  * Created by zy on 2016/11/3.
  */
 
-public class RecyclerViewIndexBarActivity  extends Activity{
+public class RecyclerViewIndexBarActivity  extends BaseActivity {
 
     private static final String TAG = "zxt";
     private RecyclerView mRv;
