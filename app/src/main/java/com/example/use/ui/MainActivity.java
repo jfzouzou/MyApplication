@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.View.MySlider;
 import com.base.BaseActivity;
 import com.util.HlistView.MainActivityHListView;
 import com.util.MyToast;
@@ -31,6 +32,12 @@ public class MainActivity extends BaseActivity {
     //本地广播
     private LocalBroadcastManager localBroadcastManager;
     private LocalReceiver localReceiver;
+
+    /**
+     * View
+     * @param savedInstanceState
+     */
+    private MySlider mMySilder;
 
 
     @Override
@@ -107,7 +114,14 @@ public class MainActivity extends BaseActivity {
 //        networkChangeReceiver = new NetworkChangeReceiver();
 //        registerReceiver(networkChangeReceiver, intentFilter);
 
-
+//        mMySilder = (MySlider) findViewById(R.id.myview);
+//        mMySilder.setOnItemSelectListener(new MySlider.OnItemSelectListener() {
+//            @Override
+//            public void onItemSelect(int index, String indexString) {
+//
+//                thread_tv.setText(indexString);
+//            }
+//        });
 
     }
 
@@ -162,19 +176,19 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    private long mPressedTime = 0;
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        long time = System.currentTimeMillis();
-        if ((time - mPressedTime) > 2000) {
-            Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
-            mPressedTime = time;
-        } else {
-            finish();
-        }
-    }
+//    private long mPressedTime = 0;
+//
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//        long time = System.currentTimeMillis();
+//        if ((time - mPressedTime) > 2000) {
+//            Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+//            mPressedTime = time;
+//        } else {
+//            finish();
+//        }
+//    }
 
 
 }

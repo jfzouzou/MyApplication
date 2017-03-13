@@ -18,7 +18,10 @@
         android:theme="@style/MainMetrialTheme">
 
         <!-- 启动页 -->
-        <activity android:name=".LoginActivity">
+        <activity
+            android:launchMode="singleTask"
+
+            android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,13 +30,17 @@
         </activity>
 
         <!-- 鸡肋 -->
-        <activity android:name="com.base.BaseActivity" />
+        <activity
+            android:launchMode="singleTask"
+            android:name="com.base.BaseActivity" />
 
         <!-- 横纵向滑动 -->
         <activity android:name=".HorizontalScrollViewListActivity" />
 
         <!-- 横纵向滑动 -->
         <activity
+            android:launchMode="singleTask"
+
             android:name="com.util.HlistView.MainActivityHListView"
             android:theme="@style/Anim_fade" />
 

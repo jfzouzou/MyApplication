@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MyBitmapViewAnother">
+        <!--背景图片属性，其属性值可以是res中的资源文件-->
+        <attr name="mybitmapviewanother_background" format="reference"></attr>
+        <!--擦除画笔宽度属性，其属性值可以是具体的值"10dp",也可以是res中的资源文件-->
+        <attr name="mybitmapviewanother_paintwidth" format="dimension|reference"></attr>
+    </declare-styleable>
+</resources>

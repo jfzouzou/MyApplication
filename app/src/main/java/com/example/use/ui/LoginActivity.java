@@ -3,7 +3,6 @@ package com.example.use.ui;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
 import android.content.Intent;
@@ -25,14 +24,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.base.BaseActivity;
+import com.util.MyToast;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
+public class LoginActivity extends BaseActivity implements LoaderCallbacks<Cursor> {
 
     /**
      * A dummy authentication store containing known user names and passwords.
@@ -299,5 +303,41 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             showProgress(false);
         }
     }
+
+    private static Boolean isExit = false;
+    private static Boolean hasTask = false;
+
+    Timer tExit = new Timer();
+    TimerTask task = new TimerTask()
+    {
+        public void run()
+        {
+            isExit = false;
+            hasTask = true;
+        }
+    };
+
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK)
+        {
+            if (isExit == false)
+            {
+                isExit = true;
+                MyToast.showToast(this, "再按一次后退键退出应用程序");
+                if (!hasTask)
+                {
+                    tExit.schedule(task, 2000);
+                }
+            } else
+            {
+                finish();
+                System.exit(0);
+            }
+        }
+        return false;
+    }
+
 }
 

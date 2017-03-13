@@ -72,7 +72,7 @@ public class BaseActivity extends FragmentActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     ActivityeCollctor.onDestoryActivity();
-                    startActivity(new Intent(BaseActivity.this, LoginActivity.class));
+                    startActivity(new Intent(BaseActivity.this, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 }
             });
             builder.show();

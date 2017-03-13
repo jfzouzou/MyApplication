@@ -28,6 +28,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-appindexing:8.4.0'
     compile 'com.github.promeg:tinypinyin:1.0.0'
     compile files('libs/android-support-v7-recyclerview.jar')
+    compile 'se.emilsjolander.stickylistheaders:library:2.1.0'
 }
 
 //解决远程依赖

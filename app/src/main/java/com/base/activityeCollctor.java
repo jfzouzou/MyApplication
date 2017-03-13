@@ -24,10 +24,11 @@ public class ActivityeCollctor {
     }
 
     public static void onDestoryActivity() {
-        for (Activity activity:activities){
-            if(!activity.isFinishing()){
+        for (Activity activity : activities) {
+            if (!activity.isFinishing()) {
                 activity.finish();
             }
         }
+        activities.clear();
     }
 }
